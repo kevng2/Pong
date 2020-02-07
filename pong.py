@@ -70,6 +70,15 @@ window.onkeypress(paddleA_down, "s")
 window.onkeypress(paddleB_up, "Up")
 window.onkeypress(paddleB_down, "Down")
 
+# Score
+score = turtle.Turtle()
+score.speed(0)
+score.color("white")
+score.penup()
+score.hideturtle()
+score.goto(0, 260)
+score.write("Player 1: 0  Player 2: 0", align = "center", font = ("courier"))
+
 # main game loop
 while True:
     window.update()
@@ -83,15 +92,14 @@ while True:
         ball.dy *= -1
     if ball.ycor() < -290:
         ball.dy *= -1
-    if ball.xcor() > 390:
-        ball.dx *= -1
-    if ball.xcor() < -390:
-        ball.dx *= -1
 
+    # teleport ball if it hits the left and right side of the window
     if ball.xcor() > 390 or ball.xcor() < -390:
-        ball.goto(0,0)
-
-    # Checking if Ball will hit the paddles
-    if ball.xcor() < -200:
-        if ball.xcor() <= paddleA.xcor() + 5 and ball.ycor() <= paddleA.ycor() + 5 or (ball.xcor() <= paddleA.xcor() + 5 and ball.ycor() >= paddleA.ycor() - 5):
-            ball.dx *= -1
+        ball.goto(0, 0)
+        ball.dx *= -1
+    
+    if (ball.xcor() > 340 and ball.xcor() > 350) and ball.ycor() < paddleB.ycor() + 50 and ball.ycor() > paddleB.ycor() - 50:
+        ball.dx *= -1
+    
+    if (ball.xcor() < -340 and ball.xcor() > -350) and ball.ycor() < paddleA.ycor() + 50 and ball.ycor() > paddleA.ycor() - 50:
+        ball.dx *= -1
