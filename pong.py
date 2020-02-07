@@ -95,8 +95,3 @@ while True:
     if ball.xcor() < -200:
         if ball.xcor() <= paddleA.xcor() + 5 and ball.ycor() <= paddleA.ycor() + 5 or (ball.xcor() <= paddleA.xcor() + 5 and ball.ycor() >= paddleA.ycor() - 5):
             ball.dx *= -1
-    """
-    if ball.xcor() > 200:
-        if ball.xcor() >= paddleB.xcor() - 5 and ball.ycor() <= paddleB.ycor() + 5 or (ball.xcor() >= paddleB.xcor() - 5 and ball.ycor() >= paddleB.ycor() - 5):
-            ball.dx *= -1
-   """ 
