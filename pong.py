@@ -79,6 +79,18 @@ score.hideturtle()
 score.goto(0, 260)
 score.write("Player 1: 0  Player 2: 0", align = "center", font = ("courier"))
 
+# Line in middle of screen
+line = turtle.Turtle()
+line.hideturtle()
+line.speed(0)
+line.color("white")
+line.goto(0,270)
+line.goto(0,-270)
+
+# Score control
+scoreA = 0
+scoreB = 0
+
 # main game loop
 while True:
     window.update()
@@ -94,12 +106,26 @@ while True:
         ball.dy *= -1
 
     # teleport ball if it hits the left and right side of the window
-    if ball.xcor() > 390 or ball.xcor() < -390:
+    if ball.xcor() > 390:
         ball.goto(0, 0)
         ball.dx *= -1
+        scoreA += 1
+        score.clear()
+        score.write("Player 1: {}  Player 2: {}".format(scoreA, scoreB), align = "center", font = ("courier"))
+
+    if ball.xcor() < -390:
+        ball.goto(0, 0)
+        ball.dx *= -1
+        scoreB += 1
+        score.clear()
+        score.write("Player 1: {}  Player 2: {}".format(scoreA, scoreB), align = "center", font = ("courier"))
     
+    # right paddle collision
     if (ball.xcor() > 340 and ball.xcor() > 350) and ball.ycor() < paddleB.ycor() + 50 and ball.ycor() > paddleB.ycor() - 50:
+        ball.setx(340)
         ball.dx *= -1
     
+    # left paddle collision
     if (ball.xcor() < -340 and ball.xcor() > -350) and ball.ycor() < paddleA.ycor() + 50 and ball.ycor() > paddleA.ycor() - 50:
+        ball.setx(-340)
         ball.dx *= -1
